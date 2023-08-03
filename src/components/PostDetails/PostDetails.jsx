@@ -3,7 +3,7 @@ import {Paper,Typography,CircularProgress,Divider} from "@mui/material";
 import { useDispatch,useSelector } from 'react-redux';
 import moment from "moment";
 import {useParams,useNavigate} from "react-router-dom";
-import useStyles from "./postDetailsStyles";
+
 import { getPost, getPostsBySearch } from '../../actions/postsActions';
 import CommentSection from './CommentSection';
 import "./postDetails.css";
@@ -12,7 +12,7 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {post,posts,isLoading} = useSelector((state) => state.posts);
-  const classes = useStyles();
+ 
   const {id} = useParams();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const PostDetails = () => {
 
   if(isLoading){
     return (
-      <Paper elevation={6} className={classes.loadingPaper}>
+      <Paper elevation={6} className="loadingPaper">
         <CircularProgress size="7em" />
       </Paper>
     )

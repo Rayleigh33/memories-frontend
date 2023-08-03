@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from 'react'
-import Styles from "./formStyle";
 import {TextField,Button,Typography,Paper} from "@mui/material";
 import FileBase from "react-file-base64";
 import { useDispatch , useSelector } from 'react-redux';
 import { createPost,updatePost } from '../../actions/postsActions';
 import { useNavigate } from 'react-router-dom';
+import "./form.css";
 
 const Form = ({currentId,setCurrentId}) => {
-    const classes = Styles();
+    
     const dispatch = useDispatch();
     const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -40,7 +40,7 @@ const Form = ({currentId,setCurrentId}) => {
 
     if(!user?.result?.name){
       return (
-        <Paper className={classes.paper}>
+        <Paper className="paper">
           <Typography variant='h6' align='center'>
             Please sign in to create memories and like other's memories
           </Typography>
@@ -49,8 +49,8 @@ const Form = ({currentId,setCurrentId}) => {
     }
 
   return (
-    <Paper className={classes.paper} elevation={6}>
-      <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+    <Paper className="paper" elevation={6}>
+      <form autoComplete='off' noValidate className="form" onSubmit={handleSubmit}>
           <Typography variant='h6'>{currentId ? "Editing" : "Creating"} a memory</Typography>
 
           <TextField 
@@ -87,7 +87,7 @@ const Form = ({currentId,setCurrentId}) => {
                 onDone={({base64}) => setPostData({...postData, selectedFile: base64})}
               />
             </div>
-            <Button className={classes.buttonSubmit} style={{margin: "10px 0"}} variant='contained' color='primary' size='large' type='submit' fullWidth>Submit</Button>
+            <Button className="buttonSubmit" style={{margin: "10px 0"}} variant='contained' color='primary' size='large' type='submit' fullWidth>Submit</Button>
             <Button variant='contained' color='secondary' size='small' onClick={clear} fullWidth>Clear</Button>
       </form>
     </Paper>

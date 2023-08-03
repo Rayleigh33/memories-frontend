@@ -1,5 +1,4 @@
 import React from 'react'
-import useStyles from "./postStyle";
 import {Card,CardActions,CardContent,CardMedia,Button,Typography} from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
@@ -10,10 +9,11 @@ import {useDispatch} from "react-redux";
 import { deletePost , likePost } from '../../../actions/postsActions';
 import {useNavigate} from "react-router-dom";
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import "./post.css";
 
 const Post = ({post,setCurrentId}) => {
   const dispatch = useDispatch();
-    const classes = useStyles();
+    
     const user = JSON.parse(localStorage.getItem("profile"));
     const navigate = useNavigate();
 
@@ -33,30 +33,30 @@ const Post = ({post,setCurrentId}) => {
     const openPost = () => navigate(`/posts/${post._id}`);
 
   return (
-    <Card className={classes.card} raised elevation={6}>
+    <Card className="card" raised elevation={6}>
     
-      <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-      <div className={classes.overlay}>
+      <CardMedia className="media" image={post.selectedFile} title={post.title} />
+      <div className="overlay">
         <Typography variant='h6'>{post.name}</Typography>
         <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
       </div>
       {(user?.result?._id === post?.creator) && (
-        <div className={classes.overlay2}>
+        <div className="overlay2">
         <Button style={{color: "white"}} size='small' onClick={()=>setCurrentId(post._id)}>
           <MoreHorizIcon fontSize='default' />
         </Button>
       </div>
       )}
      
-      <div className={classes.details}>
+      <div className="details">
       <Typography variant='body2' color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
       </div>
-      <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
+      <Typography className="title" variant='h5' gutterBottom>{post.title}</Typography>
       <CardContent>
       <Typography variant='body2' color="textSecondary" component="p">{post.message}</Typography>
       </CardContent>
      
-      <CardActions className={classes.cardActions}>
+      <CardActions className="cardActions">
         <Button size='small' color='primary' disabled={!user?.result} onClick={()=>dispatch(likePost(post._id))}>
           <Likes />
         </Button>
@@ -66,7 +66,7 @@ const Post = ({post,setCurrentId}) => {
         </Button>
         )}
 
-        <Button size='small' color='primary' className={classes.cardAction} onClick={openPost}>
+        <Button size='small' color='primary' className="cardAction" onClick={openPost}>
          <RemoveRedEyeRoundedIcon />
         </Button>
         
