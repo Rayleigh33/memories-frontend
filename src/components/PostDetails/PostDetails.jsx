@@ -43,6 +43,9 @@ const PostDetails = () => {
   return (
    <Paper style={{padding: "20px" , borderRadius: "15px"}} elevation={6}>
     <div className="card">
+    <div className="imageSection">
+          <img  src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+        </div>
         <div className="section">
           <Typography variant="h3" component="h2">{post.title}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
@@ -55,9 +58,7 @@ const PostDetails = () => {
           <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
-        <div className="imageSection">
-          <img className="media" src={post.selectedFile} alt={post.title} />
-        </div>
+       
       </div>
        {recommendedPosts.length && (
         <div className="section">
